@@ -44,7 +44,8 @@ class MainActivity : AppCompatActivity() {
 
         bt_start.setOnClickListener { it: View? ->
             if (Prflg == true) {
-                handler.post(runnable)
+//                handler.post(runnable)
+                handler.postDelayed(runnable, 1000)
 
                 bt_start.text = getString(R.string.stop_val)
                 bt_start.setBackgroundColor(Color.rgb(0xFF,0x68,0x00))
