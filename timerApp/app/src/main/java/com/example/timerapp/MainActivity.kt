@@ -17,17 +17,18 @@ class MainActivity : AppCompatActivity() {
     var timeval = 0
     var Prflg = true
 
-//    lateinit var mAdView :AdView
+    lateinit var mAdView :AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-/*
+
         MobileAds.initialize(this) {}
+
         mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
-*/
+
         //handlerの処理
         val runnable = object : Runnable {
             //メッセージの確認
@@ -37,15 +38,17 @@ class MainActivity : AppCompatActivity() {
                     tV_time.text = it
                 }
 
-                handler.postDelayed(this, 1000)
+//                handler.postDelayed(this, 1000)
+                handler.postDelayed(this, 100)
 
             }
         }
 
-        bt_start.setOnClickListener { it: View? ->
+        bt_start.setOnClickListener {
             if (Prflg == true) {
 //                handler.post(runnable)
-                handler.postDelayed(runnable, 1000)
+//                handler.postDelayed(runnable, 1000)
+                handler.postDelayed(runnable, 100)
 
                 bt_start.text = getString(R.string.stop_val)
                 bt_start.setBackgroundColor(Color.rgb(0xFF,0x68,0x00))
@@ -91,9 +94,16 @@ class MainActivity : AppCompatActivity() {
             getString(R.string.time_def)            // ０の場合
         } else {
             val h = time / 3600
+            val m = (time % 3600) / 60
+            val s = ((time % 3600) % 60) /100
+            val ms = (time % 100000) / 10
+            "%1$02d:%2$02d:%3$02d.%4$03d".format(h, m, s,ms)  // 表示に整形
+/*
+            val h = time / 3600
             val m = time % 3600 / 60
             val s = time % 60
-            "%1$02d:%2$02d:%3$02d".format(h, m, s)  // 表示に整形
+            "%1$02d:%2$02d:%3$02d.%4$02d".format(h, m, s)  // 表示に整形
+ */
         }
     }
 }
